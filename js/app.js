@@ -3,6 +3,7 @@ errorDiv.style.display = 'none';
 const searchBook = () => {
     const inputValue = document.getElementById('input-filed');
     const searchText = inputValue.value;
+
     //empty value error checking
     if (searchText === '') {
         errorDiv.style.display = 'block';
@@ -21,17 +22,21 @@ const showBook = (books) => {
     const bookList = books.docs;
     //checking search result
     document.getElementById('view-results').innerHTML = `<p>About ${bookList.length} results out of ${books.numFound}</p>`
+    const bookContainer = document.getElementById('book-container');
+
 
     if ((bookList.length) === 0) {
         errorDiv.style.display = 'block';
         errorDiv.innerText = 'no result found';
+        bookContainer.innerHTML = '';
+
 
     }
     else {
         bookList.length ? errorDiv.style.display = 'none' : '';
         //bring book container from html
-        const bookContainer = document.getElementById('book-container');
         bookContainer.textContent = '';
+
         bookList.forEach(book => {
             let author = '';
             let bookPublisher = '';
